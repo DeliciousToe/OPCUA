@@ -1,63 +1,63 @@
-# NodeID_Browser - Narzędzia do Przeglądania i Walidacji NodeID OPC UA
+# NodeID_Browser - OPC UA NodeID Browse and Validation Tools
 
-Ten branch zawiera zestaw narzędzi w języku Python, które służą do przeglądania przestrzeni adresowej serwerów OPC UA na urządzeniach Siemens SITOP UPS1600 24V/DC. Skrypty te są nieocenione podczas procesu identyfikacji i walidacji konkretnych NodeID, które odpowiadają za dane telemetryczne dostępne w systemach UPS.
+This branch contains a set of Python tools designed to browse the address space of OPC UA servers on Siemens SITOP UPS1600 24V/DC devices. These scripts are invaluable during the process of identifying and validating specific NodeIDs that correspond to telemetry data available from UPS systems.
 
-## Cel
+## Purpose
 
-Głównym celem tych skryptów jest:
-* **`opcua_nodes_browse.py`**: Umożliwienie rekurencyjnego przeglądania całej lub części przestrzeni adresowej serwera OPC UA, wyświetlając nazwy węzłów, ich NodeID i klasy. Jest to szczególnie przydatne do odkrywania struktury danych na UPS-ie.
-* **`opcua_specific_nodes.py`**: Pozwala na bezpośrednie odczytanie wartości z predefiniowanych NodeID. Służy do szybkiej weryfikacji, czy konkretne NodeID dostarczają oczekiwane dane i w jakim formacie.
+The main goals of these scripts are:
+* **`opcua_nodes_browse.py`**: Enables recursive Browse of all or part of the OPC UA server's address space, displaying node names, their NodeIDs, and classes. This is particularly useful for discovering the data structure on the UPS.
+* **`opcua_specific_nodes.py`**: Allows direct reading of values from predefined NodeIDs. This serves for quick verification of whether specific NodeIDs provide the expected data and in what format.
 
-Te narzędzia są kluczowe podczas początkowej fazy konfiguracji monitoringu, gdy potrzebujemy ustalić, które NodeID odpowiadają za konkretne parametry (np. napięcie baterii, temperatura, statusy alarmowe).
+These tools are crucial during the initial setup phase of monitoring when you need to determine which NodeIDs correspond to specific parameters (e.g., battery voltage, temperature, alarm statuses).
 
-## Wymagania
+## Requirements
 
-Aby skrypty działały poprawnie, niezbędne są następujące komponenty:
+For the scripts to function correctly, the following components are essential:
 
-1.  **Python 3:** Skrypty zostały napisane w Pythonie 3.
-2.  **Biblioteka `opcua-client`:** Do komunikacji z serwerem OPC UA.
+1.  **Python 3:** The scripts are written in Python 3.
+2.  **`opcua-client` library:** For communication with the OPC UA server.
     ```bash
     pip install opcua-client
     ```
-3.  **Dostęp sieciowy do UPS-a:** Urządzenie UPS musi być dostępne pod wskazanym adresem IP oraz mieć aktywny serwer OPC UA.
+3.  **Network access to the UPS:** The UPS device must be accessible at the specified IP address and have an active OPC UA server.
 
-## Konfiguracja
+## Configuration
 
-Przed uruchomieniem skryptów należy skonfigurować następujące parametry:
+Before running the scripts, the following parameters must be configured:
 
-* **Adres IP UPS-a:** Zmienna `UPS_IP_ADDRESS`.
-* **Port OPC UA:** Zmienna `OPCUA_PORT` (domyślnie 4840).
-* **Poświadczenia OPC UA:** Zmienne `OPCUA_USERNAME` i `OPCUA_PASSWORD`.
+* **UPS IP Address:** `UPS_IP_ADDRESS` variable.
+* **OPC UA Port:** `OPCUA_PORT` variable (default is 4840).
+* **OPC UA Credentials:** `OPCUA_USERNAME` and `OPCUA_PASSWORD` variables.
 
-**Ważne: Zarządzanie Poświadczeniami i Adresem IP**
+**Important: OPC UA Credential and IP Address Management**
 
-**Te skrypty zawierają miejsca na wpisanie adresu IP oraz poświadczeń do serwera OPC UA. NIE POWINNY być one twardo zakodowane w wersji, którą umieszczasz w publicznym repozytorium GitHub.**
+**These scripts contain placeholders for the IP address and OPC UA server credentials. They SHOULD NOT be hardcoded in the version you commit to a public GitHub repository.**
 
-**Zaleca się, aby przed użyciem tych skryptów, wartości `UPS_IP_ADDRESS`, `OPCUA_USERNAME` i `OPCUA_PASSWORD` były dostarczane w bezpieczny sposób:**
+**It is recommended that, before using these scripts, the values for `UPS_IP_ADDRESS`, `OPCUA_USERNAME`, and `OPCUA_PASSWORD` are provided in a secure manner:**
 
-* **Edycja przed uruchomieniem:** Przed uruchomieniem skryptu, zmień tymczasowo wartości w pliku, a następnie **nie zapisuj ich i nie commituj** do Git.
-* **Zmienne środowiskowe:** Możesz zmodyfikować skrypty, aby odczytywały te wartości ze zmiennych środowiskowych.
+* **Edit before running:** Temporarily change the values in the file before running the script, and then **do not save and do not commit** these changes to Git.
+* **Environment Variables:** You can modify the scripts to read these values from environment variables.
     ```python
     import os
-    UPS_IP_ADDRESS = os.environ.get('UPS_IP_ADDRESS', '127.0.0.1') # Domyślna wartość, jeśli zmienna nie ustawiona
+    UPS_IP_ADDRESS = os.environ.get('UPS_IP_ADDRESS', '127.0.0.1') # Default value if variable not set
     OPCUA_USERNAME = os.environ.get('OPCUA_USERNAME')
     OPCUA_PASSWORD = os.environ.get('OPCUA_PASSWORD')
     ```
-    Następnie ustaw zmienne przed uruchomieniem:
+    Then set the variables before running:
     ```bash
     export UPS_IP_ADDRESS="10.201.5.12"
     export OPCUA_USERNAME="your_username"
     export OPCUA_PASSWORD="your_password"
     python3 opcua_nodes_browse.py
     ```
-* **Argumenty wiersza poleceń:** Jest to bardzo elastyczna metoda dla narzędzi diagnostycznych. Możesz użyć modułu `argparse` do dodania obsługi argumentów takich jak `--ip`, `--user`, `--password`.
+* **Command-line Arguments:** This is a very flexible method for diagnostic tools. You can use the `argparse` module to add support for arguments like `--ip`, `--user`, `--password`.
 
-## Uruchomienie
+## Running the Scripts
 
 ### `opcua_nodes_browse.py`
 
-Ten skrypt przegląda całą przestrzeń adresową OPC UA, co może zająć trochę czasu i wygenerować dużo danych. Domyślnie ustawiona jest maksymalna głębokość przeglądania (`max_depth=5`), którą można zmienić w kodzie.
+This script browses the entire OPC UA address space, which can take some time and generate a lot of output. By default, the maximum Browse depth is set to (`max_depth=5`), which can be changed within the code.
 
 ```bash
-# Upewnij się, że skonfigurowałeś IP i poświadczenia w skrypcie lub przez zmienne środowiskowe
+# Ensure you have configured the IP and credentials in the script or via environment variables
 python3 opcua_nodes_browse.py
