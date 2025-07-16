@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>7.0</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>cab6c1c8aa1a43e18c7847a08fb845d9</uuid>
+            <template>UPS by OPC-UA</template>
+            <name>UPS by OPC-UA</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>5b1ca9bd43594d888f5546190e9c68ea</uuid>
+                    <name>UPS Alarm: Battery Deep Discharge</name>
+                    <type>TRAP</type>
+                    <key>ups.alarm.battery_deep_discharge</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>30d</trends>
+                    <description>Status alarmu głębokiego rozładowania akumulatora (0=OK, 1=Alarm).</description>
+                    <valuemap>
+                        <name>UPS_STATUS</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <uuid>5b1db90b7b96406ca7a039d0e1270e4a</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.alarm.battery_deep_discharge)=1</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.alarm.battery_deep_discharge)=0</recovery_expression>
+                            <name>{HOST.NAME}: Alarm - Głębokie rozładowanie baterii</name>
+                            <priority>HIGH</priority>
+                            <description>Wyzwala, gdy UPS zgłasza alarm głębokiego rozładowania baterii. Wskazuje na krytyczny stan baterii, wymagający natychmiastowej uwagi.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>dd845e717f7f438d945a0655e08071d9</uuid>
+                    <name>UPS Alarm: Battery Low</name>
+                    <type>TRAP</type>
+                    <key>ups.alarm.battery_low</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>30d</trends>
+                    <description>Status alarmu niskiego poziomu naładowania akumulatora (0=OK, 1=Alarm).</description>
+                    <valuemap>
+                        <name>UPS_STATUS</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <uuid>f31e9d9c1adc424cad592ce171d69531</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.alarm.battery_low)=1</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.alarm.battery_low)=0</recovery_expression>
+                            <name>{HOST.NAME}: Alarm - Niski poziom baterii</name>
+                            <priority>HIGH</priority>
+                            <description>Wyzwala, gdy UPS sygnalizuje niski poziom naładowania baterii.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>ec49f4fb4fcc443f9927d444263ae2b9</uuid>
+                    <name>UPS Alarm: Battery Temperature High</name>
+                    <type>TRAP</type>
+                    <key>ups.alarm.battery_temperature_high</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>30d</trends>
+                    <description>Status alarmu wysokiej temperatury akumulatora (0=OK, 1=Alarm).</description>
+                    <valuemap>
+                        <name>UPS_STATUS</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <uuid>0f9c423a1a54400ca555ad6638901780</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.alarm.battery_temperature_high)=1</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.alarm.battery_temperature_high)=0</recovery_expression>
+                            <name>{HOST.NAME}: Alarm - Wysoka temperatura baterii</name>
+                            <priority>AVERAGE</priority>
+                            <description>Wyzwala, gdy UPS zgłasza alarm wysokiej temperatury baterii. Może prowadzić do uszkodzenia baterii.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>067c31b756914efe959d1e612ed30502</uuid>
+                    <name>UPS Alarm: Device Overtemperature</name>
+                    <type>TRAP</type>
+                    <key>ups.alarm.device_overtemperature</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>30d</trends>
+                    <description>Status alarmu przegrzania urządzenia UPS (0=OK, 1=Alarm).</description>
+                    <valuemap>
+                        <name>UPS_STATUS</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <uuid>fc1b6268d4f243a3be914950f0b5b895</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.alarm.device_overtemperature)=1</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.alarm.device_overtemperature)=0</recovery_expression>
+                            <name>{HOST.NAME}: Alarm - Przegrzanie urządzenia</name>
+                            <priority>DISASTER</priority>
+                            <description>Wyzwala, gdy UPS zgłasza alarm przegrzania urządzenia. Krytyczny stan wymagający natychmiastowej interwencji.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>07f86159650a4986ae2c4d5666962e9e</uuid>
+                    <name>UPS Alarm: Input Voltage High</name>
+                    <type>TRAP</type>
+                    <key>ups.alarm.input_voltage_high</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>30d</trends>
+                    <description>Status alarmu zbyt wysokiego napięcia wejściowego (0=OK, 1=Alarm).</description>
+                    <valuemap>
+                        <name>UPS_STATUS</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <uuid>d18435f266c54fa0a8b40c7ba64fba73</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.alarm.input_voltage_high)=1</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.alarm.input_voltage_high)=0</recovery_expression>
+                            <name>{HOST.NAME}: Alarm - Wysokie napięcie wejściowe</name>
+                            <priority>AVERAGE</priority>
+                            <description>Wyzwala, gdy UPS zgłasza alarm zbyt wysokiego napięcia wejściowego.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>d62de116f0b94618b6c7aff9505a51f5</uuid>
+                    <name>UPS Alarm: Input Voltage Low</name>
+                    <type>TRAP</type>
+                    <key>ups.alarm.input_voltage_low</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>30d</trends>
+                    <description>Status alarmu zbyt niskiego napięcia wejściowego (0=OK, 1=Alarm).</description>
+                    <valuemap>
+                        <name>UPS_STATUS</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <uuid>5ae61a2e96e845688a0fa903765f6a11</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.alarm.input_voltage_low)=1</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.alarm.input_voltage_low)=0</recovery_expression>
+                            <name>{HOST.NAME}: Alarm - Niskie napięcie wejściowe</name>
+                            <priority>AVERAGE</priority>
+                            <description>Wyzwala, gdy UPS zgłasza alarm zbyt niskiego napięcia wejściowego.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>b67a69e21bb640b69ca67773ff445674</uuid>
+                    <name>UPS Alarm: Mains Failure</name>
+                    <type>TRAP</type>
+                    <key>ups.alarm.mains_failure</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>30d</trends>
+                    <description>Status alarmu braku zasilania sieciowego (0=OK, 1=Alarm).</description>
+                    <valuemap>
+                        <name>UPS_STATUS</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <uuid>15b0fd3fd0f0440d930b84c3671758c8</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.alarm.mains_failure)=1</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.alarm.mains_failure)=0</recovery_expression>
+                            <name>{HOST.NAME}: Alarm - Awaria zasilania sieciowego</name>
+                            <priority>HIGH</priority>
+                            <description>Wyzwala, gdy UPS wykrywa awarię zasilania sieciowego i przechodzi na zasilanie bateryjne.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>4f3542d297eb48cdb7d9635157459167</uuid>
+                    <name>UPS Alarm: Output Overload</name>
+                    <type>TRAP</type>
+                    <key>ups.alarm.output_overload</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>30d</trends>
+                    <description>Status alarmu przeciążenia wyjścia (0=OK, 1=Alarm).</description>
+                    <valuemap>
+                        <name>UPS_STATUS</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <uuid>c4760dcf0a1844b0bbd79507ccd8eb06</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.alarm.output_overload)=1</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.alarm.output_overload)=0</recovery_expression>
+                            <name>{HOST.NAME}: Alarm - Przeciążenie wyjścia</name>
+                            <priority>HIGH</priority>
+                            <description>Wyzwala, gdy UPS zgłasza przeciążenie wyjścia. Może prowadzić do wyłączenia zasilania.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>f45a348ac48a4d26873c485734b733a4</uuid>
+                    <name>UPS Alarm: UPS Fault (General)</name>
+                    <type>TRAP</type>
+                    <key>ups.alarm.ups_fault</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>30d</trends>
+                    <description>Status ogólnego błędu/usterki UPS (0=OK, 1=Alarm).</description>
+                    <valuemap>
+                        <name>UPS_STATUS</name>
+                    </valuemap>
+                </item>
+                <item>
+                    <uuid>d6772f88a79b41ca9daeb4c19b09cbe4</uuid>
+                    <name>UPS Battery Change Recommended</name>
+                    <type>TRAP</type>
+                    <key>ups.battery.change_recommended</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>30d</trends>
+                    <description>Status zalecenia wymiany akumulatora (0=OK, 1=Wymiana zalecana).</description>
+                    <valuemap>
+                        <name>UPS_STATUS</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <uuid>492b25b8725b441186a5e1b892f695a2</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.battery.change_recommended)=1</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.battery.change_recommended)=0</recovery_expression>
+                            <name>{HOST.NAME}: Zalecana wymiana baterii</name>
+                            <priority>WARNING</priority>
+                            <description>Wyzwala, gdy UPS zaleca wymianę baterii. Wskazuje na zbliżający się koniec żywotności baterii.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>b491b07a38374636903a3ac787f737c0</uuid>
+                    <name>UPS Battery Charge Level</name>
+                    <type>TRAP</type>
+                    <key>ups.battery.charge_level</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <trends>30d</trends>
+                    <units>%</units>
+                    <description>Poziom naładowania akumulatora UPS w procentach (%).</description>
+                    <triggers>
+                        <trigger>
+                            <uuid>0b1a4a82033245cda0a4c131a203c2d2</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.battery.charge_level)&lt;20</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.battery.charge_level)&gt;=20</recovery_expression>
+                            <name>{HOST.NAME}: Poziom naładowania baterii poniżej 20%</name>
+                            <priority>AVERAGE</priority>
+                            <description>Wyzwala, gdy poziom naładowania baterii spadnie poniżej 20%.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>ea7803f996834edda887a44ba055a02e</uuid>
+                    <name>UPS Battery Voltage</name>
+                    <type>TRAP</type>
+                    <key>ups.battery.voltage</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <trends>30d</trends>
+                    <units>V</units>
+                    <description>Napięcie akumulatora UPS w woltach (V).</description>
+                    <triggers>
+                        <trigger>
+                            <uuid>68a83b7367f84d7b99d41ae26ef2ffad</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.battery.voltage)&lt;23.0</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.battery.voltage)&gt;=23.0</recovery_expression>
+                            <name>{HOST.NAME}: Napięcie baterii poniżej progu (23.0V)</name>
+                            <priority>WARNING</priority>
+                            <description>Wyzwala, gdy napięcie baterii spadnie poniżej ustalonego progu.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>bd243acfe2384ec7ab120d80097ae36b</uuid>
+                    <name>UPS Buffer Remaining Time</name>
+                    <type>TRAP</type>
+                    <key>ups.buffer.remaining_time</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <trends>30d</trends>
+                    <units>s</units>
+                    <description>Szacowany pozostały czas pracy UPS na baterii w sekundach (s).</description>
+                    <triggers>
+                        <trigger>
+                            <uuid>472198a1037648fe8b6adea8b829e45f</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.buffer.remaining_time)&lt;600</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.buffer.remaining_time)&gt;=600</recovery_expression>
+                            <name>{HOST.NAME}: Pozostały czas buforowania poniżej 10 minut</name>
+                            <priority>WARNING</priority>
+                            <description>Wyzwala, gdy szacowany czas podtrzymania zasilania na baterii spadnie poniżej 10 minut.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>2a6df223c24145ce9f23556720a43c60</uuid>
+                    <name>UPS Connection Status</name>
+                    <type>TRAP</type>
+                    <key>ups.connection.status</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>30d</trends>
+                    <description>Status połączenia z serwerem OPC UA na UPS. Wartość 1 oznacza połączony, 0 oznacza brak połączenia.</description>
+                    <valuemap>
+                        <name>UPS_STATUS</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <uuid>4e94573aba644828babe0bd1a2989211</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.connection.status)=0</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.connection.status)=1</recovery_expression>
+                            <name>{HOST.NAME}: Brak połączenia z serwerem OPC UA</name>
+                            <priority>HIGH</priority>
+                            <description>Wyzwala, gdy skrypt nie jest w stanie nawiązać połączenia z serwerem OPC UA UPS-a.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>8b82b2a23edb4b96aeeccc4188e4d348</uuid>
+                    <name>UPS Device Temperature</name>
+                    <type>TRAP</type>
+                    <key>ups.device.temperature</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <trends>30d</trends>
+                    <units>°C</units>
+                    <description>Temperatura wewnętrzna urządzenia UPS w stopniach Celsjusza (°C).</description>
+                    <triggers>
+                        <trigger>
+                            <uuid>e76f604c4e2b4684ae199cdea0fc2cef</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.device.temperature)&gt;=50</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.device.temperature)&lt;50</recovery_expression>
+                            <name>{HOST.NAME}: Temperatura urządzenia powyżej 50°C</name>
+                            <priority>AVERAGE</priority>
+                            <description>Wyzwala, gdy temperatura wewnętrzna urządzenia UPS przekroczy 50°C.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>b3beb5d5ac4f420db38846c891b122a1</uuid>
+                    <name>UPS Input Frequency</name>
+                    <type>TRAP</type>
+                    <key>ups.input.frequency</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <trends>30d</trends>
+                    <units>Hz</units>
+                    <description>Częstotliwość napięcia wejściowego z sieci zasilającej do UPS w Hertzach (Hz).</description>
+                    <triggers>
+                        <trigger>
+                            <uuid>9f76fa06c13744e8a0f9cf99b9159c82</uuid>
+                            <expression>nodata(/UPS by OPC-UA/ups.input.frequency,7m)=1</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>nodata(/UPS by OPC-UA/ups.input.frequency,3m)=0</recovery_expression>
+                            <name>{HOST.NAME}: Częstotliwość wejściowa - Problem z odczytem</name>
+                            <priority>INFO</priority>
+                            <description>Wyzwala, jeśli przez dłuższy czas nie są odbierane dane dotyczące częstotliwości wejściowej (lub jeśli jest to typ danych, którego Zabbix nie może przetworzyć numerycznie).</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>8f5e18d00be144ecb189460d54784645</uuid>
+                    <name>UPS Input Voltage</name>
+                    <type>TRAP</type>
+                    <key>ups.input.voltage</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <trends>30d</trends>
+                    <units>V</units>
+                    <description>Napięcie wejściowe z sieci zasilającej do UPS w woltach (V).</description>
+                    <triggers>
+                        <trigger>
+                            <uuid>16736b13ed304446bcf55b2736512df4</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.input.voltage)&lt;20.0</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.input.voltage)&gt;=20.0</recovery_expression>
+                            <name>{HOST.NAME}: Napięcie wejściowe poniżej progu (20.0V)</name>
+                            <priority>AVERAGE</priority>
+                            <description>Wyzwala, gdy napięcie wejściowe spadnie poniżej ustalonego progu.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>9bc6ecbfc3f045fcbe2e8d3cf0eaa491</uuid>
+                    <name>UPS Load Current</name>
+                    <type>TRAP</type>
+                    <key>ups.load.current</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <trends>30d</trends>
+                    <units>A</units>
+                    <description>Prąd obciążenia UPS w amperach (A).</description>
+                    <triggers>
+                        <trigger>
+                            <uuid>3b9aa1d61b5a4fedab5c5409ade84ce2</uuid>
+                            <expression>last(/UPS by OPC-UA/ups.load.current)&gt;=5.0</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/UPS by OPC-UA/ups.load.current)&lt;5.0</recovery_expression>
+                            <name>{HOST.NAME}: Prąd obciążenia powyżej progu (5.0A - przeciążenie)</name>
+                            <priority>AVERAGE</priority>
+                            <description>Wyzwala, gdy prąd obciążenia przekroczy ustalony próg, wskazując na potencjalne przeciążenie.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>76b27bc81f594806b831a3b1fce1061f</uuid>
+                    <name>UPS Output Frequency</name>
+                    <type>TRAP</type>
+                    <key>ups.output.frequency</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <trends>30d</trends>
+                    <units>Hz</units>
+                    <description>Częstotliwość napięcia wyjściowego dostarczanego przez UPS w Hertzach (Hz).</description>
+                    <triggers>
+                        <trigger>
+                            <uuid>18311e6ebc4c4134b1c9d451f1ea7d68</uuid>
+                            <expression>nodata(/UPS by OPC-UA/ups.output.frequency,7m)=1</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>nodata(/UPS by OPC-UA/ups.output.frequency,4m)=0</recovery_expression>
+                            <name>{HOST.NAME}: Częstotliwość wyjściowa - Problem z odczytem</name>
+                            <priority>WARNING</priority>
+                            <description>Wyzwala, jeśli przez dłuższy czas nie są odbierane dane dotyczące częstotliwości wyjściowej.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>f2aa6a31e7544640bd8ee961c038542b</uuid>
+                    <name>UPS Output Voltage</name>
+                    <type>TRAP</type>
+                    <key>ups.output.voltage</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <trends>30d</trends>
+                    <units>V</units>
+                    <description>Napięcie wyjściowe dostarczane przez UPS do podłączonych urządzeń w woltach (V).</description>
+                </item>
+            </items>
+            <valuemaps>
+                <valuemap>
+                    <uuid>917cdbf6fd7d4b55998b70b7b79b7ee1</uuid>
+                    <name>UPS_STATUS</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>OK</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>ALARM</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+            </valuemaps>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <uuid>432cdc9dbce44550820a1b8889a89d3d</uuid>
+            <name>{HOST.NAME}: Czas Buforowania i Status Połączenia</name>
+            <graph_items>
+                <graph_item>
+                    <color>199C0D</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.buffer.remaining_time</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.connection.status</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>e50a1667d028494b961e89b6d5a94061</uuid>
+            <name>{HOST.NAME}: Częstotliwość (jeśli odczyt jest liczbowy)</name>
+            <graph_items>
+                <graph_item>
+                    <color>199C0D</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.input.frequency</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.output.frequency</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>078281c80a2a4cc4b0b736e5cc914810</uuid>
+            <name>{HOST.NAME}: Kluczowe Alerty (Binarnie 0/1)</name>
+            <graph_items>
+                <graph_item>
+                    <color>199C0D</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.alarm.battery_deep_discharge</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.alarm.device_overtemperature</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>2774A4</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.alarm.mains_failure</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>F7941D</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.alarm.output_overload</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>FC6EA3</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.alarm.ups_fault</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>6588f10df06d487087ae5be0ce562cc7</uuid>
+            <name>{HOST.NAME}: Napięcia Wejściowe i Wyjściowe</name>
+            <graph_items>
+                <graph_item>
+                    <color>199C0D</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.input.voltage</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.output.voltage</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>d318ce56788e4b6ca7957dc5e083f185</uuid>
+            <name>{HOST.NAME}: Obciążenie i Temperatura Urządzenia</name>
+            <graph_items>
+                <graph_item>
+                    <color>199C0D</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.device.temperature</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.load.current</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>bc04f0e781804272985f6b939f8a69ee</uuid>
+            <name>{HOST.NAME}: Stan wejścia i wyjścia (Alerty Napięciowe)</name>
+            <graph_items>
+                <graph_item>
+                    <color>199C0D</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.alarm.input_voltage_high</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.alarm.input_voltage_low</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>2774A4</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.alarm.mains_failure</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>bba1c461c6514a77a2e849e82d3329bf</uuid>
+            <name>{HOST.NAME}: Status Baterii i Ładowania</name>
+            <graph_items>
+                <graph_item>
+                    <color>199C0D</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.battery.change_recommended</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.battery.charge_level</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>2774A4</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>UPS by OPC-UA</host>
+                        <key>ups.battery.voltage</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
